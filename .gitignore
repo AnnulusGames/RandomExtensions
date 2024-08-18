@@ -1,0 +1,5 @@
+# Visual Studio Code
+.vscode/
+
+# OS Files
+*.DS_Store
