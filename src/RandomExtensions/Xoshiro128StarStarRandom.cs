@@ -26,10 +26,13 @@ public sealed class Xoshiro128StarStarRandom : IRandom
 
     public void InitState(uint seed)
     {
-        xoshiro.S0 = SplitMix32.Next(ref seed);
-        xoshiro.S1 = SplitMix32.Next(ref seed);
-        xoshiro.S2 = SplitMix32.Next(ref seed);
-        xoshiro.S3 = SplitMix32.Next(ref seed);
+        do
+        {
+            xoshiro.S0 = SplitMix32.Next(ref seed);
+            xoshiro.S1 = SplitMix32.Next(ref seed);
+            xoshiro.S2 = SplitMix32.Next(ref seed);
+            xoshiro.S3 = SplitMix32.Next(ref seed);
+        } while (xoshiro.S0 == 0 && xoshiro.S1 == 0 && xoshiro.S2 == 0 && xoshiro.S3 == 0);
     }
 
     public uint NextUInt()
