@@ -202,6 +202,25 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
         totalWeight -= value.Weight;
     }
 
+    public int RemoveRandom(IRandom random, out T item)
+    {
+        var r = random.NextDouble() * totalWeight;
+        var current = 0.0;
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            current += list[i].Weight;
+            if (r <= current)
+            {
+                item = list[i].Value;
+                return i;
+            }
+        }
+
+        item = default!;
+        return -1;
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
