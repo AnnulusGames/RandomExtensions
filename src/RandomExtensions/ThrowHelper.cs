@@ -23,7 +23,7 @@ internal static class ThrowHelper
 
     public static void ThrowIfLengthIsNegative(int length)
     {
-        if (length < 0) throw new ArgumentOutOfRangeException(nameof(length), "Length cannot be less than zero.");
+        if (length < 0) throw new ArgumentOutOfRangeException(nameof(length), "Length cannot be less than zero");
     }
 
     public static void CheckMax(int max)
