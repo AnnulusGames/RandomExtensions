@@ -214,10 +214,14 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
 
         for (int i = 0; i < list.Count; i++)
         {
-            current += list[i].Weight;
+            var wv = list[i];
+            current += wv.Weight;
+            
             if (r <= current)
             {
-                item = list[i].Value;
+                item = wv.Value;
+                list.RemoveAt(i);
+                totalWeight -= wv.Weight;
                 return i;
             }
         }
