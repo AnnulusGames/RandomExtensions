@@ -5,8 +5,7 @@ public static partial class RandomEx
     /// <summary>
     /// Performs an in-place shuffle of an array.
     /// </summary>
-    public static void Shuffle<TRandom, TValue>(this TRandom random, TValue[] values)
-        where TRandom : IRandom
+    public static void Shuffle<T>(this IRandom random, T[] values)
     {
         ThrowHelper.ThrowIfNull(values);
 
@@ -20,8 +19,7 @@ public static partial class RandomEx
     /// <summary>
     /// Performs an in-place shuffle of a span.
     /// </summary>
-    public static void Shuffle<TRandom, TValue>(this TRandom random, Span<TValue> values)
-        where TRandom : IRandom
+    public static void Shuffle<T>(this IRandom random, Span<T> values)
     {
         for (int i = values.Length - 1; i > 0; i--)
         {

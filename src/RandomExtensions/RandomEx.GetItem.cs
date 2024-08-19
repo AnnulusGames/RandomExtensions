@@ -7,18 +7,16 @@ public static partial class RandomEx
     /// <summary>
     /// Returns a random element from the provided choices.
     /// </summary>
-    public static TValue GetItem<TRandom, TValue>(this TRandom random, TValue[] choices)
-        where TRandom : IRandom
+    public static T GetItem<T>(this IRandom random, T[] choices)
     {
         ThrowHelper.ThrowIfNull(choices);
-        return GetItem(random, new ReadOnlySpan<TValue>(choices));
+        return GetItem(random, new ReadOnlySpan<T>(choices));
     }
 
     /// <summary>
     /// Returns a random element from the provided choices.
     /// </summary>
-    public static TValue GetItem<TRandom, TValue>(this TRandom random, ReadOnlySpan<TValue> choices)
-        where TRandom : IRandom
+    public static T GetItem<T>(this IRandom random, ReadOnlySpan<T> choices)
     {
         ThrowHelper.ThrowIfEmpty(choices);
         return choices[random.NextInt(choices.Length)];
@@ -27,8 +25,7 @@ public static partial class RandomEx
     /// <summary>
     /// Returns a random element based on the weights.
     /// </summary>
-    public static TValue GetItem<TRandom, TValue>(this TRandom random, ReadOnlySpan<TValue> choices, ReadOnlySpan<double> weights)
-        where TRandom : IRandom
+    public static T GetItem<T>(this IRandom random, ReadOnlySpan<T> choices, ReadOnlySpan<double> weights)
     {
         ThrowHelper.ThrowIfEmpty(choices);
 
@@ -61,12 +58,11 @@ public static partial class RandomEx
     /// <summary>
     /// Creates an array populated with items chosen at random from the provided set of choices.
     /// </summary>
-    public static TValue[] GetItems<TRandom, TValue>(this TRandom random, ReadOnlySpan<TValue> choices, int length)
-        where TRandom : IRandom
+    public static T[] GetItems<T>(this IRandom random, ReadOnlySpan<T> choices, int length)
     {
         ThrowHelper.ThrowIfLengthIsNegative(length);
 
-        var destination = new TValue[length];
+        var destination = new T[length];
         GetItems(random, choices, destination.AsSpan());
 
         return destination;
@@ -75,12 +71,11 @@ public static partial class RandomEx
     /// <summary>
     /// Creates an array populated with items chosen at random from the provided set of choices.
     /// </summary>
-    public static TValue[] GetItems<TRandom, TValue>(this TRandom random, ReadOnlySpan<TValue> choices, ReadOnlySpan<double> weights, int length)
-        where TRandom : IRandom
+    public static T[] GetItems<T>(this IRandom random, ReadOnlySpan<T> choices, ReadOnlySpan<double> weights, int length)
     {
         ThrowHelper.ThrowIfLengthIsNegative(length);
 
-        var destination = new TValue[length];
+        var destination = new T[length];
         GetItems(random, choices, weights, destination.AsSpan());
 
         return destination;
@@ -89,8 +84,7 @@ public static partial class RandomEx
     /// <summary>
     /// Fills the elements of a specified span with items chosen at random from the provided set of choices.
     /// </summary>
-    public static void GetItems<TRandom, TValue>(this TRandom random, ReadOnlySpan<TValue> choices, Span<TValue> destination)
-        where TRandom : IRandom
+    public static void GetItems<T>(this IRandom random, ReadOnlySpan<T> choices, Span<T> destination)
     {
         ThrowHelper.ThrowIfEmpty(choices);
 
@@ -128,8 +122,7 @@ public static partial class RandomEx
     /// <summary>
     /// Fills the elements of a specified span with items chosen at random from the provided set of choices.
     /// </summary>
-    public static void GetItems<TRandom, TValue>(this TRandom random, ReadOnlySpan<TValue> choices, ReadOnlySpan<double> weights, Span<TValue> destination)
-        where TRandom : IRandom
+    public static void GetItems<T>(this IRandom random, ReadOnlySpan<T> choices, ReadOnlySpan<double> weights, Span<T> destination)
     {
         ThrowHelper.ThrowIfEmpty(choices);
 

@@ -10,8 +10,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector2 value with all components in [0, 1).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 NextVector2<T>(this T random)
-            where T : IRandom
+        public static Vector2 NextVector2(this IRandom random)
         {
             return new Vector2(random.NextFloat(), random.NextFloat());
         }
@@ -20,8 +19,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector2 value with all components in [0, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 NextVector2<T>(this T random, Vector2 max)
-            where T : IRandom
+        public static Vector2 NextVector2(this IRandom random, Vector2 max)
         {
             return new Vector2(random.NextFloat(max.x), random.NextFloat(max.y));
         }
@@ -30,8 +28,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector2 value with all components in [min, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 NextVector2<T>(this T random, Vector2 min, Vector2 max)
-            where T : IRandom
+        public static Vector2 NextVector2(this IRandom random, Vector2 min, Vector2 max)
         {
             return new Vector2(random.NextFloat(min.x, max.x), random.NextFloat(min.y, max.y));
         }
@@ -39,9 +36,7 @@ namespace RandomExtensions.Unity
         /// <summary>
         /// Returns a unit length Vector2 vector representing a uniformly random 2D direction.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 NextVector2Direction<T>(this T random)
-            where T : IRandom
+        public static Vector2 NextVector2Direction(this IRandom random)
         {
             float angle = random.NextFloat() * Mathf.PI * 2.0f;
 
@@ -55,8 +50,7 @@ namespace RandomExtensions.Unity
         /// Returns a random point inside a unit circle.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 NextVector2InsideCircle<T>(this T random)
-            where T : IRandom
+        public static Vector2 NextVector2InsideCircle(this IRandom random)
         {
             return NextVector2Direction(random) * random.NextFloat();
         }
@@ -65,8 +59,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector3 value with all components in [0, 1).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 NextVector3<T>(this T random)
-            where T : IRandom
+        public static Vector3 NextVector3(this IRandom random)
         {
             return new Vector3(random.NextFloat(), random.NextFloat(), random.NextFloat());
         }
@@ -75,8 +68,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector3 value with all components in [0, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 NextVector3<T>(this T random, Vector3 max)
-            where T : IRandom
+        public static Vector3 NextVector3(this IRandom random, Vector3 max)
         {
             return new Vector3(random.NextFloat(max.x), random.NextFloat(max.y), random.NextFloat(max.z));
         }
@@ -85,8 +77,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector3 value with all components in [min, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 NextVector3<T>(this T random, Vector3 min, Vector3 max)
-            where T : IRandom
+        public static Vector3 NextVector3(this IRandom random, Vector3 min, Vector3 max)
         {
             return new Vector3(random.NextFloat(min.x, max.x), random.NextFloat(min.y, max.y), random.NextFloat(min.z, max.z));
         }
@@ -94,9 +85,7 @@ namespace RandomExtensions.Unity
         /// <summary>
         /// Returns a unit length Vector2 vector representing a uniformly random 2D direction.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 NextVector3Direction<T>(this T random)
-            where T : IRandom
+        public static Vector3 NextVector3Direction(this IRandom random)
         {
             var rnd = NextVector2(random);
             var z = rnd.x * 2.0f - 1.0f;
@@ -113,8 +102,7 @@ namespace RandomExtensions.Unity
         /// Returns a random point inside a unit sphere.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 NextVector3InsideSphere<T>(this T random)
-            where T : IRandom
+        public static Vector3 NextVector3InsideSphere(this IRandom random)
         {
             return NextVector3Direction(random) * random.NextFloat();
         }
@@ -123,8 +111,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector4 value with all components in [0, 1).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 NextVector4<T>(this T random)
-            where T : IRandom
+        public static Vector4 NextVector4(this IRandom random)
         {
             return new Vector4(random.NextFloat(), random.NextFloat(), random.NextFloat(), random.NextFloat());
         }
@@ -133,8 +120,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector4 value with all components in [0, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 NextVector4<T>(this T random, Vector4 max)
-            where T : IRandom
+        public static Vector4 NextVector4(this IRandom random, Vector4 max)
         {
             return new Vector4(random.NextFloat(max.x), random.NextFloat(max.y), random.NextFloat(max.z), random.NextFloat(max.w));
         }
@@ -143,8 +129,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Vector4 value with all components in [min, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 NextVector4<T>(this T random, Vector4 min, Vector4 max)
-            where T : IRandom
+        public static Vector4 NextVector4(this IRandom random, Vector4 min, Vector4 max)
         {
             return new Vector4(random.NextFloat(min.x, max.x), random.NextFloat(min.y, max.y), random.NextFloat(min.z, max.z), random.NextFloat(min.w, max.w));
         }
@@ -152,9 +137,7 @@ namespace RandomExtensions.Unity
         /// <summary>
         /// Returns a unit length quaternion representing a uniformly 3D rotation.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion NextQuaternionRotation<T>(this T random)
-            where T : IRandom
+        public static Quaternion NextQuaternionRotation(this IRandom random)
         {
             var rnd = random.NextVector3(new Vector3(2.0f * Mathf.PI, 2.0f * Mathf.PI, 1.0f));
             var u1 = rnd.z;
@@ -173,8 +156,7 @@ namespace RandomExtensions.Unity
         /// <summary>
         /// Returns a random Color.
         /// </summary>
-        public static Color NextColor<T>(this T random)
-            where T : IRandom
+        public static Color NextColor(this IRandom random)
         {
             var v = random.NextVector4();
             return new Color(v.x, v.y, v.z, v.w);
@@ -184,8 +166,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Color value with all components in [0, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color NextColor<T>(this T random, Color max)
-            where T : IRandom
+        public static Color NextColor(this IRandom random, Color max)
         {
             return new Vector4(random.NextFloat(max.r), random.NextFloat(max.g), random.NextFloat(max.b), random.NextFloat(max.a));
         }
@@ -194,8 +175,7 @@ namespace RandomExtensions.Unity
         /// Returns a random Color value with all components in [min, max).
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color NextColor<T>(this T random, Color min, Color max)
-            where T : IRandom
+        public static Color NextColor(this IRandom random, Color min, Color max)
         {
             return new Vector4(random.NextFloat(min.r, max.r), random.NextFloat(min.g, max.g), random.NextFloat(min.b, max.b), random.NextFloat(min.a, max.a));
         }
@@ -203,8 +183,7 @@ namespace RandomExtensions.Unity
         /// <summary>
         /// Returns a random Color with HSV values.
         /// </summary>
-        public static Color NextColorHSV<T>(this T random, float hueMin, float hueMax, float saturationMin, float saturationMax, float valueMin, float valueMax)
-            where T : IRandom
+        public static Color NextColorHSV(this IRandom random, float hueMin, float hueMax, float saturationMin, float saturationMax, float valueMin, float valueMax)
         {
             var h = Mathf.Lerp(hueMin, hueMax, random.NextFloat());
             var s = Mathf.Lerp(saturationMin, saturationMax, random.NextFloat());
@@ -216,8 +195,7 @@ namespace RandomExtensions.Unity
         /// <summary>
         /// Returns a random Color with HSV and alpha values.
         /// </summary>
-        public static Color NextColorHSV<T>(this T random, float hueMin, float hueMax, float saturationMin, float saturationMax, float valueMin, float valueMax, float alphaMin, float alphaMax)
-            where T : IRandom
+        public static Color NextColorHSV(this IRandom random, float hueMin, float hueMax, float saturationMin, float saturationMax, float valueMin, float valueMax, float alphaMin, float alphaMax)
         {
             var color = NextColorHSV(random, hueMin, hueMax, saturationMin, saturationMax, valueMin, valueMax);
             color.a = Mathf.Lerp(alphaMin, alphaMax, random.NextFloat());

@@ -11,8 +11,7 @@ public static partial class RandomEx
     /// Returns a random bool value.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool NextBool<T>(this T random)
-        where T : IRandom
+    public static bool NextBool(this IRandom random)
     {
         return (random.NextUInt() & 1) == 1;
     }
@@ -21,8 +20,7 @@ public static partial class RandomEx
     /// Returns a random uint value in [0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint NextUInt<T>(this T random, uint max)
-        where T : IRandom
+    public static uint NextUInt(this IRandom random, uint max)
     {
         return (uint)((random.NextUInt() * (ulong)max) >> 32);
     }
@@ -31,8 +29,7 @@ public static partial class RandomEx
     /// Returns a random uint value in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint NextUInt<T>(this T random, uint min, uint max)
-        where T : IRandom
+    public static uint NextUInt(this IRandom random, uint min, uint max)
     {
         ThrowHelper.CheckMinMax(min, max);
         uint range = max - min;
@@ -43,8 +40,7 @@ public static partial class RandomEx
     /// Returns a random int value in [int.MinValue, int.MaxValue].
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int NextInt<T>(this T random)
-        where T : IRandom
+    public static int NextInt(this IRandom random)
     {
         return (int)random.NextUInt() ^ -2147483648;
     }
@@ -53,8 +49,7 @@ public static partial class RandomEx
     /// Returns a random int value in [0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int NextInt<T>(this T random, int max)
-        where T : IRandom
+    public static int NextInt(this IRandom random, int max)
     {
         ThrowHelper.CheckMax(max);
         return (int)((random.NextUInt() * (ulong)max) >> 32);
@@ -64,8 +59,7 @@ public static partial class RandomEx
     /// Returns a random int value in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int NextInt<T>(this T random, int min, int max)
-        where T : IRandom
+    public static int NextInt(this IRandom random, int min, int max)
     {
         ThrowHelper.CheckMinMax(min, max);
         var range = (uint)(max - min);
@@ -76,8 +70,7 @@ public static partial class RandomEx
     /// Returns a random ulong value in [0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong NextULong<T>(this T random, ulong max)
-        where T : IRandom
+    public static ulong NextULong(this IRandom random, ulong max)
     {
         if (max <= uint.MaxValue)
         {
@@ -91,8 +84,7 @@ public static partial class RandomEx
     /// Returns a random ulong value in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong NextULong<T>(this T random, ulong min, ulong max)
-        where T : IRandom
+    public static ulong NextULong(this IRandom random, ulong min, ulong max)
     {
         ThrowHelper.CheckMinMax(min, max);
         return NextULong(random, max - min) + min;
@@ -102,8 +94,7 @@ public static partial class RandomEx
     /// Returns a random long value in [long.MinValue, long.MaxValue].
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static long NextLong<T>(this T random)
-        where T : IRandom
+    public static long NextLong(this IRandom random)
     {
         return (long)random.NextULong();
     }
@@ -111,8 +102,7 @@ public static partial class RandomEx
     /// <summary>
     /// Returns a random long value in [0, max).
     /// </summary>
-    public static long NextLong<T>(this T random, long max)
-        where T : IRandom
+    public static long NextLong(this IRandom random, long max)
     {
         ThrowHelper.CheckMax(max);
 
@@ -140,8 +130,7 @@ public static partial class RandomEx
     /// <summary>
     /// Returns a random long value in [min, max).
     /// </summary>
-    public static long NextLong<T>(this T random, long min, long max)
-        where T : IRandom
+    public static long NextLong(this IRandom random, long min, long max)
     {
         ulong range = (ulong)(max - min);
 
@@ -181,8 +170,7 @@ public static partial class RandomEx
     /// Returns a random float value in [0.0, 1.0).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float NextFloat<T>(this T random)
-        where T : IRandom
+    public static float NextFloat(this IRandom random)
     {
         return (random.NextUInt() >> 8) * (1.0f / (1u << 24));
     }
@@ -191,8 +179,7 @@ public static partial class RandomEx
     /// Returns a random float value in [0.0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float NextFloat<T>(this T random, float max)
-        where T : IRandom
+    public static float NextFloat(this IRandom random, float max)
     {
         ThrowHelper.CheckMax(max);
         return NextFloat(random) * max;
@@ -202,8 +189,7 @@ public static partial class RandomEx
     /// Returns a random float value in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static float NextFloat<T>(this T random, float min, float max)
-        where T : IRandom
+    public static float NextFloat(this IRandom random, float min, float max)
     {
         ThrowHelper.CheckMinMax(min, max);
         return NextFloat(random) * (max - min) + min;
@@ -213,8 +199,7 @@ public static partial class RandomEx
     /// Returns a random double value in [0.0, 1.0).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static double NextDouble<T>(this T random)
-        where T : IRandom
+    public static double NextDouble(this IRandom random)
     {
         return (random.NextULong() >> 11) * (1.0 / (1ul << 53));
     }
@@ -223,8 +208,7 @@ public static partial class RandomEx
     /// Returns a random double value in [0.0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static double NextDouble<T>(this T random, double max)
-        where T : IRandom
+    public static double NextDouble(this IRandom random, double max)
     {
         ThrowHelper.CheckMax(max);
         return NextDouble(random) * max;
@@ -234,8 +218,7 @@ public static partial class RandomEx
     /// Returns a random double value in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static double NextDouble<T>(this T random, double min, double max)
-        where T : IRandom
+    public static double NextDouble(this IRandom random, double min, double max)
     {
         ThrowHelper.CheckMinMax(min, max);
         return NextDouble(random) * (max - min) + min;
@@ -244,8 +227,7 @@ public static partial class RandomEx
     /// <summary>
     /// Returns a Gaussian distributed random double value with mean 0.0 and standard deviation 1.0.
     /// </summary>
-    public static double NextDoubleGaussian<T>(this T random)
-        where T : IRandom
+    public static double NextDoubleGaussian(this IRandom random)
     {
         double v1, v2, s;
         do
@@ -262,8 +244,7 @@ public static partial class RandomEx
     /// <summary>
     /// Fills the buffer with random bytes [0..0x7f].
     /// </summary>
-    public static unsafe void NextBytes<T>(this T random, byte[] buffer)
-        where T : IRandom
+    public static unsafe void NextBytes(this IRandom random, byte[] buffer)
     {
         ThrowHelper.ThrowIfNull(buffer);
         NextBytes(random, buffer.AsSpan());
@@ -272,8 +253,7 @@ public static partial class RandomEx
     /// <summary>
     /// Fills the buffer with random bytes [0..0x7f].
     /// </summary>
-    public static unsafe void NextBytes<T>(this T random, Span<byte> buffer)
-        where T : IRandom
+    public static unsafe void NextBytes(this IRandom random, Span<byte> buffer)
     {
         if (random is Xoshiro128StarStarRandom xoshiro1)
         {

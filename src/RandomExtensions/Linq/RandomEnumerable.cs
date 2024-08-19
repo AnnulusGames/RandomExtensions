@@ -18,8 +18,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Creates a repeating sequence of random values ​​in the range [min, max).
     /// </summary>
-    public static IEnumerable<int> Repeat<TRandom>(int min, int max, int length, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<int> Repeat(int min, int max, int length, IRandom random)
     {
         for (int i = 0; i < length; i++)
         {
@@ -38,8 +37,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Creates a repeating sequence of random values ​​in the range [min, max).
     /// </summary>
-    public static IEnumerable<uint> Repeat<TRandom>(uint min, uint max, int length, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<uint> Repeat(uint min, uint max, int length, IRandom random)
     {
         for (int i = 0; i < length; i++)
         {
@@ -58,8 +56,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Creates a repeating sequence of random values ​​in the range [min, max).
     /// </summary>
-    public static IEnumerable<long> Repeat<TRandom>(long min, long max, int length, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<long> Repeat(long min, long max, int length, IRandom random)
     {
         for (int i = 0; i < length; i++)
         {
@@ -78,8 +75,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Creates a repeating sequence of random values ​​in the range [min, max).
     /// </summary>
-    public static IEnumerable<ulong> Repeat<TRandom>(ulong min, ulong max, int length, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<ulong> Repeat(ulong min, ulong max, int length, IRandom random)
     {
         for (int i = 0; i < length; i++)
         {
@@ -98,8 +94,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Creates a repeating sequence of random values ​​in the range [min, max).
     /// </summary>
-    public static IEnumerable<float> Repeat<TRandom>(float min, float max, int length, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<float> Repeat(float min, float max, int length, IRandom random)
     {
         for (int i = 0; i < length; i++)
         {
@@ -118,8 +113,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Creates a repeating sequence of random values ​​in the range [min, max).
     /// </summary>
-    public static IEnumerable<double> Repeat<TRandom>(double min, double max, int length, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<double> Repeat(double min, double max, int length, IRandom random)
     {
         for (int i = 0; i < length; i++)
         {
@@ -138,20 +132,19 @@ public static class RandomEnumerable
     /// <summary>
     /// Returns a random element of a sequence.
     /// </summary>
-    public static TValue RandomElement<TValue, TRandom>(this IEnumerable<TValue> source, TRandom random)
-        where TRandom : IRandom
+    public static T RandomElement<T>(this IEnumerable<T> source, IRandom random)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        if (source is TValue[] array)
+        if (source is T[] array)
         {
             return random.GetItem(array);
         }
-        if (source is List<TValue> list)
+        if (source is List<T> list)
         {
-            return random.GetItem<TRandom, TValue>(CollectionsMarshal.AsSpan(list));
+            return random.GetItem<T>(CollectionsMarshal.AsSpan(list));
         }
-        if (source is IReadOnlyList<TValue> readOnlyList)
+        if (source is IReadOnlyList<T> readOnlyList)
         {
             if (readOnlyList.Count == 0) throw new ArgumentException("The collection is empty.");
             return readOnlyList[random.NextInt(0, readOnlyList.Count)];
@@ -174,8 +167,7 @@ public static class RandomEnumerable
     /// <summary>
     /// Returns a shuffled sequence.
     /// </summary>
-    public static IEnumerable<TValue> Shuffle<TValue, TRandom>(this IEnumerable<TValue> source, TRandom random)
-        where TRandom : IRandom
+    public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, IRandom random)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

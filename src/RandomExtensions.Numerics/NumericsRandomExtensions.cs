@@ -9,8 +9,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector2 value with all components in [0, 1).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector2 NextVector2<T>(this T random)
-        where T : IRandom
+    public static Vector2 NextVector2(this IRandom random)
     {
         return new Vector2(random.NextFloat(), random.NextFloat());
     }
@@ -19,8 +18,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector2 value with all components in [0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector2 NextVector2<T>(this T random, Vector2 max)
-        where T : IRandom
+    public static Vector2 NextVector2(this IRandom random, Vector2 max)
     {
         return new Vector2(random.NextFloat(max.X), random.NextFloat(max.Y));
     }
@@ -29,8 +27,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector2 value with all components in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector2 NextVector2<T>(this T random, Vector2 min, Vector2 max)
-        where T : IRandom
+    public static Vector2 NextVector2(this IRandom random, Vector2 min, Vector2 max)
     {
         return new Vector2(random.NextFloat(min.X, max.X), random.NextFloat(min.Y, max.Y));
     }
@@ -39,8 +36,7 @@ public static class NumericsRandomExtensions
     /// Returns a unit length Vector2 vector representing a uniformly random 2D direction.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector2 NextVector2Direction<T>(this T random)
-        where T : IRandom
+    public static Vector2 NextVector2Direction(this IRandom random)
     {
         float angle = random.NextFloat() * MathF.PI * 2.0f;
 #if NET6_0_OR_GREATER
@@ -56,8 +52,7 @@ public static class NumericsRandomExtensions
     /// Returns a random point inside a unit circle.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector2 NextVector2InsideCircle<T>(this T random)
-        where T : IRandom
+    public static Vector2 NextVector2InsideCircle(this IRandom random)
     {
         return NextVector2Direction(random) * random.NextFloat();
     }
@@ -66,8 +61,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector3 value with all components in [0, 1).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3 NextVector3<T>(this T random)
-        where T : IRandom
+    public static Vector3 NextVector3(this IRandom random)
     {
         return new Vector3(random.NextFloat(), random.NextFloat(), random.NextFloat());
     }
@@ -76,8 +70,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector3 value with all components in [0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3 NextVector3<T>(this T random, Vector3 max)
-        where T : IRandom
+    public static Vector3 NextVector3(this IRandom random, Vector3 max)
     {
         return new Vector3(random.NextFloat(max.X), random.NextFloat(max.Y), random.NextFloat(max.Z));
     }
@@ -86,8 +79,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector3 value with all components in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3 NextVector3<T>(this T random, Vector3 min, Vector3 max)
-        where T : IRandom
+    public static Vector3 NextVector3(this IRandom random, Vector3 min, Vector3 max)
     {
         return new Vector3(random.NextFloat(min.X, max.X), random.NextFloat(min.Y, max.Y), random.NextFloat(min.Z, max.Z));
     }
@@ -96,8 +88,7 @@ public static class NumericsRandomExtensions
     /// Returns a unit length Vector2 vector representing a uniformly random 2D direction.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3 NextVector3Direction<T>(this T random)
-        where T : IRandom
+    public static Vector3 NextVector3Direction(this IRandom random)
     {
         var rnd = NextVector2(random);
         var z = rnd.X * 2.0f - 1.0f;
@@ -118,8 +109,7 @@ public static class NumericsRandomExtensions
     /// Returns a random point inside a unit sphere.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector3 NextVector3InsideSphere<T>(this T random)
-        where T : IRandom
+    public static Vector3 NextVector3InsideSphere(this IRandom random)
     {
         return NextVector3Direction(random) * random.NextFloat();
     }
@@ -128,8 +118,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector4 value with all components in [0, 1).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector4 NextVector4<T>(this T random)
-        where T : IRandom
+    public static Vector4 NextVector4(this IRandom random)
     {
         return new Vector4(random.NextFloat(), random.NextFloat(), random.NextFloat(), random.NextFloat());
     }
@@ -138,8 +127,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector4 value with all components in [0, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector4 NextVector4<T>(this T random, Vector4 max)
-        where T : IRandom
+    public static Vector4 NextVector4(this IRandom random, Vector4 max)
     {
         return new Vector4(random.NextFloat(max.X), random.NextFloat(max.Y), random.NextFloat(max.Z), random.NextFloat(max.W));
     }
@@ -148,8 +136,7 @@ public static class NumericsRandomExtensions
     /// Returns a random Vector4 value with all components in [min, max).
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vector4 NextVector4<T>(this T random, Vector4 min, Vector4 max)
-        where T : IRandom
+    public static Vector4 NextVector4(this IRandom random, Vector4 min, Vector4 max)
     {
         return new Vector4(random.NextFloat(min.X, max.X), random.NextFloat(min.Y, max.Y), random.NextFloat(min.Z, max.Z), random.NextFloat(min.W, max.W));
     }
@@ -158,8 +145,7 @@ public static class NumericsRandomExtensions
     /// Returns a unit length quaternion representing a uniformly 3D rotation.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Quaternion NextQuaternionRotation<T>(this T random)
-        where T : IRandom
+    public static Quaternion NextQuaternionRotation(this IRandom random)
     {
         var rnd = random.NextVector3(new Vector3(2.0f * MathF.PI, 2.0f * MathF.PI, 1.0f));
         var u1 = rnd.Z;
