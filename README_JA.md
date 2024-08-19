@@ -332,7 +332,7 @@ Random ExtensionsはUnityで使用可能なほか、Unity向けの拡張パッ�
 3. `Window > Package Manager`からPackage Managerウィンドウを開き、`[+] > Add package from git URL`から以下のURLを入力します。
 
     ```
-    https://github.com/AnnulusGames/RandomExtensions.git?path=src/RandomExtensions/Assets/RandomExtensions.Unity
+    https://github.com/AnnulusGames/RandomExtensions.git?path=src/RandomExtensions.Unity/Assets/RandomExtensions.Unity
     ```
 
 ### 拡張メソッド
