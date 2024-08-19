@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/RandomEx.svg)](https://www.nuget.org/packages/RandomEx)
 [![Releases](https://img.shields.io/github/release/AnnulusGames/RandomExtensions.svg)](https://github.com/AnnulusGames/RandomExtensions/releases)
 
-Random Extensions is a library that provides functionality for pseudorandom number generation for .NET/Unity.
+Random Extensions is a library that provides functionality for pseudorandom number generation for .NET and Unity.
 
 .NET has a built-in `Random` class, but it is not sufficient in terms of functionality and contains complex implementations and unnecessary abstractions due to compatibility issues.
 
