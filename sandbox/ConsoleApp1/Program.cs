@@ -1,4 +1,6 @@
-﻿using RandomExtensions;
-using RandomExtensions.Linq;
+﻿using RandomExtensions.Linq;
 
-Console.WriteLine(string.Join(':', RandomEnumerable.Repeat(0f, 10f, 100)));
+foreach (var i in RandomEnumerable.Repeat(0L, 10000L, 100))
+{
+    Console.WriteLine(i);
+}
