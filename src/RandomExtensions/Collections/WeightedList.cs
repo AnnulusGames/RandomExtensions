@@ -202,13 +202,15 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
         totalWeight -= value.Weight;
     }
 
-    public int RemoveRandom(out T item)
+    public void RemoveRandom(out T item)
     {
-        return RemoveRandom(RandomEx.Shared, out item);
+        RemoveRandom(RandomEx.Shared, out item);
     }
 
-    public int RemoveRandom(IRandom random, out T item)
+    public void RemoveRandom(IRandom random, out T item)
     {
+        if (Count == 0) throw new InvalidOperationException("Empty list");
+
         var r = random.NextDouble() * totalWeight;
         var current = 0.0;
 
@@ -222,12 +224,11 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
                 item = wv.Value;
                 list.RemoveAt(i);
                 totalWeight -= wv.Weight;
-                return i;
+                return;
             }
         }
 
         item = default!;
-        return -1;
     }
 
     IEnumerator IEnumerable.GetEnumerator()
