@@ -124,8 +124,7 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
         return new Enumerator(this);
     }
 
-    public T GetItem<TRandom>(TRandom random)
-        where TRandom : IRandom
+    public T GetItem(IRandom random)
     {
         var r = random.NextDouble() * totalWeight;
         var current = 0.0;
@@ -142,8 +141,7 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
         return default!;
     }
 
-    public void GetItems<TRandom>(TRandom random, Span<T> destination)
-        where TRandom : IRandom
+    public void GetItems(IRandom random, Span<T> destination)
     {
         for (int i = 0; i < destination.Length; i++)
         {
