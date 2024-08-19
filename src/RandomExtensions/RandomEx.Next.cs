@@ -242,6 +242,24 @@ public static partial class RandomEx
     }
 
     /// <summary>
+    /// Returns a Gaussian distributed random double value with mean 0.0 and standard deviation 1.0.
+    /// </summary>
+    public static double NextDoubleGaussian<T>(this T random)
+        where T : IRandom
+    {
+        double v1, v2, s;
+        do
+        {
+            v1 = 2 * NextDouble(random) - 1;
+            v2 = 2 * NextDouble(random) - 1;
+            s = v1 * v1 + v2 * v2;
+        } while (s >= 1 || s == 0);
+
+        double multiplier = Math.Sqrt(-2 * Math.Log(s) / s);
+        return v1 * multiplier;
+    }
+
+    /// <summary>
     /// Fills the buffer with random bytes [0..0x7f].
     /// </summary>
     public static unsafe void NextBytes<T>(this T random, byte[] buffer)
