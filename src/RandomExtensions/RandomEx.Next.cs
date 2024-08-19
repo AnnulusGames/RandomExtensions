@@ -77,7 +77,20 @@ public static partial class RandomEx
             return random.NextUInt((uint)max);
         }
 
-        return random.NextULong() % (max + 1);
+        if (max > 1)
+        {
+            int bits = Log2Ceiling(max);
+            while (true)
+            {
+                ulong result = random.NextULong() >> (sizeof(ulong) * 8 - bits);
+                if (result < max)
+                {
+                    return result;
+                }
+            }
+        }
+
+        return 0;
     }
 
     /// <summary>
@@ -113,15 +126,7 @@ public static partial class RandomEx
 
         if (max > 1)
         {
-            int bits = Log2Ceiling((ulong)max);
-            while (true)
-            {
-                ulong result = random.NextULong() >> (sizeof(ulong) * 8 - bits);
-                if (result < (ulong)max)
-                {
-                    return (long)result;
-                }
-            }
+            return (long)random.NextULong();
         }
 
         return 0;
@@ -132,27 +137,7 @@ public static partial class RandomEx
     /// </summary>
     public static long NextLong(this IRandom random, long min, long max)
     {
-        ulong range = (ulong)(max - min);
-
-        if (range <= int.MaxValue)
-        {
-            return NextInt(random, (int)range) + min;
-        }
-
-        if (range > 1)
-        {
-            int bits = Log2Ceiling(range);
-            while (true)
-            {
-                ulong result = random.NextULong() >> (sizeof(ulong) * 8 - bits);
-                if (result < range)
-                {
-                    return (long)result + min;
-                }
-            }
-        }
-
-        return min;
+        return NextLong(random, max - min) + min;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
