@@ -2,6 +2,11 @@
 
 [![NuGet](https://img.shields.io/nuget/v/RandomEx.svg)](https://www.nuget.org/packages/RandomEx)
 [![Releases](https://img.shields.io/github/release/AnnulusGames/RandomExtensions.svg)](https://github.com/AnnulusGames/RandomExtensions/releases)
+[![GitHub license](https://img.shields.io/github/license/AnnulusGames/RandomExtensions.svg)](./LICENSE)
+
+English | [日本語](README_JA.md)
+
+## Overview
 
 Random Extensions is a library that provides functionality for pseudorandom number generation for .NET and Unity.
 
@@ -9,7 +14,7 @@ Random Extensions is a library that provides functionality for pseudorandom numb
 
 Unity's `UnityEngine.Random` is a static class, making it impossible to instantiate. Additionally, it manages internal states, making it difficult to reproduce random numbers.
 
-Random Extensions introduces `IRandom` as a new abstraction layer for random number generation, providing high-speed implementations based on multiple algorithms (xoshift, xoshiro, splitmix, PCG). It also offers many useful features for handling random numbers, such as extension methods that support `System.Numerics` and Unity types, `IWeightedCollection<T>` for handling weighted random numbers, and LINQ extensions for random numbers (`RandomEnumerable`).
+Random Extensions introduces `IRandom` as a new abstraction layer for random number generation, providing high performance implementations based on various algorithms (xoshift, xoshiro, splitmix, PCG). It also offers many useful features for handling random numbers, such as extension methods that support `System.Numerics` and Unity types, `IWeightedCollection<T>` for handling weighted random numbers, and LINQ extensions for random numbers (`RandomEnumerable`).
 
 ## Installation
 

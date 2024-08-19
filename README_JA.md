@@ -2,6 +2,11 @@
 
 [![NuGet](https://img.shields.io/nuget/v/RandomEx.svg)](https://www.nuget.org/packages/RandomEx)
 [![Releases](https://img.shields.io/github/release/AnnulusGames/RandomExtensions.svg)](https://github.com/AnnulusGames/RandomExtensions/releases)
+[![GitHub license](https://img.shields.io/github/license/AnnulusGames/RandomExtensions.svg)](./LICENSE)
+
+[English]((./README.md)) | 日本語
+
+## 概要
 
 Random Extensionsは.NET/Unity向けに擬似乱数生成の機能を提供するライブラリです。
 
