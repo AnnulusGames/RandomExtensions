@@ -74,7 +74,7 @@ public static partial class RandomEx
     {
         if (max <= uint.MaxValue)
         {
-            return random.NextUInt();
+            return random.NextUInt((uint)max);
         }
 
         return random.NextULong() % (max + 1);
