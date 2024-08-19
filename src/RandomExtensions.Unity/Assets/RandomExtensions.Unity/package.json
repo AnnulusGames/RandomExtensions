@@ -2,7 +2,7 @@
     "name": "com.annulusgames.random-extensions.unity",
     "version": "1.0.0",
     "displayName": "RandomExtensions.Unity",
-    "description": "RandomExtensions package for Unity.",
+    "description": "RandomExtensions plugin for Unity.",
     "author": {
         "name": "Annulus Games"
     }
