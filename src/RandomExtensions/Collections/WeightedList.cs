@@ -209,7 +209,7 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
 
     public void RemoveRandom(IRandom random, out T item)
     {
-        if (Count == 0) throw new InvalidOperationException("Empty list");
+        if (list.Count == 0) throw new InvalidOperationException("Empty list");
 
         var r = random.NextDouble() * totalWeight;
         var current = 0.0;
@@ -228,7 +228,7 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
             }
         }
 
-        item = default!;
+        item = list[^1].Value;
     }
 
     IEnumerator IEnumerable.GetEnumerator()
