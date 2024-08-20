@@ -14,14 +14,17 @@ public class WeightedListTests
             { 3, 3.0 },
         };
 
-        list.RemoveRandom(out _);
+        list.RemoveRandom(out var item0);
         Assert.That(list, Has.Count.EqualTo(2));
+        Assert.That(item0, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
 
-        list.RemoveRandom(out _);
+        list.RemoveRandom(out var item1);
         Assert.That(list, Has.Count.EqualTo(1));
+        Assert.That(item1, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
 
-        list.RemoveRandom(out _);
+        list.RemoveRandom(out var item2);
         Assert.That(list, Has.Count.EqualTo(0));
+        Assert.That(item2, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
 
         Assert.Throws<InvalidOperationException>(() => list.RemoveRandom(out _));
     }
