@@ -30,6 +30,43 @@ public class WeightedListTests
     }
 
     [Test]
+    public void Test_GetItem()
+    {
+        var list = new WeightedList<int>
+        {
+            { 1, 1.0 },
+            { 2, 2.0 },
+            { 3, 3.0 },
+        };
+
+        var elements = list.GetItems(10000);
+
+        for (int i = 0; i < elements.Length; i++)
+        {
+            Assert.That(elements[i], Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
+        }
+    }
+
+    [Test]
+    public void Test_GetItems()
+    {
+        var list = new WeightedList<int>
+        {
+            { 1, 1.0 },
+            { 2, 2.0 },
+            { 3, 3.0 },
+        };
+
+        for (int i = 0; i < 10000; i++)
+        {
+            var element = list.GetItem();
+            Assert.That(list, Has.Count.EqualTo(3));
+            Assert.That(element, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
+        }
+    }
+
+
+    [Test]
     public void Test_Values()
     {
         var list = new WeightedList<int>
