@@ -1,7 +1,10 @@
-﻿namespace RandomExtensions;
+namespace RandomExtensions;
 
 public static partial class RandomEx
 {
+    [ThreadStatic] static Random? seedGenerator;
+    static Random SeedGenerator => seedGenerator ??= new();
+
     /// <summary>
     /// Provides a thread-safe IRandom instance that may be used concurrently from any thread.
     /// </summary>
@@ -12,7 +15,7 @@ public static partial class RandomEx
     /// </summary>
     public static IRandom Create()
     {
-        return new Xoshiro256StarStarRandom((uint)new Random().Next());
+        return new Xoshiro256StarStarRandom((uint)SeedGenerator.Next());
     }
 }
 
