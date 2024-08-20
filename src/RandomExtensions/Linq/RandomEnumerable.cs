@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
+using RandomExtensions.Collections;
 
 namespace RandomExtensions.Linq;
 
@@ -172,12 +173,30 @@ public static class RandomEnumerable
         if (source == null) throw new ArgumentNullException(nameof(source));
 
         var buffer = source.ToArray();
-        
+
         for (int i = 0; i < buffer.Length; i++)
         {
             int j = random.NextInt(i, buffer.Length);
             yield return buffer[j];
             buffer[j] = buffer[i];
         }
+    }
+
+    /// <summary>
+    /// Creates a WeightedList from an IEnumerable according to a specified weight selector function.
+    /// </summary>
+    public static WeightedList<T> ToWeightedList<T>(this IEnumerable<T> source, Func<T, double> weightSelector)
+    {
+        ThrowHelper.ThrowIfNull(source);
+        ThrowHelper.ThrowIfNull(weightSelector);
+
+        var list = new WeightedList<T>();
+
+        foreach (var item in source)
+        {
+            list.Add(item, weightSelector(item));
+        }
+
+        return list;
     }
 }
