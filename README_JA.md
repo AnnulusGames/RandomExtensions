@@ -16,6 +16,9 @@ Unityの`UnityEngine.Random`はstaticクラスであるためインスタンス�
 
 Random Extensionsでは新たな乱数生成の抽象レイヤーとして`IRandom`を導入し、複数のアルゴリズム(xoshift, xoshiro, splitmix, PCG)に基づく高速な実装を提供します。また、`System.Numerics`やUnityの型に対応した拡張メソッド、重み付き乱数を扱うための`IWeightedCollection<T>`、乱数に対応したLINQの拡張(`RandomEnumerable`)など、乱数を取り扱う上で便利な多くの機能を用意しています。
 
+> [!WARNING]
+> このライブラリをセキュリティ目的で使用しないでください。暗号的に安全な乱数が必要な場合は`System.Security.Cryptography.RandomNumberGenerator`の利用を推奨します。
+
 ## インストール
 
 ### NuGet packages

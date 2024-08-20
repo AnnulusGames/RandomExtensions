@@ -16,6 +16,9 @@ Unity's `UnityEngine.Random` is a static class, making it impossible to instanti
 
 Random Extensions introduces `IRandom` as a new abstraction layer for random number generation, providing high performance implementations based on various algorithms (xoshift, xoshiro, splitmix, PCG). It also offers many useful features for handling random numbers, such as extension methods that support `System.Numerics` and Unity types, `IWeightedCollection<T>` for handling weighted random numbers, and LINQ extensions for random numbers (`RandomEnumerable`).
 
+> [!WARNING]
+> Do not use this library for security purposes. If you need cryptographically secure random numbers, use `System.Security.Cryptography.RandomNumberGenerator`.
+
 ## Installation
 
 ### NuGet packages
