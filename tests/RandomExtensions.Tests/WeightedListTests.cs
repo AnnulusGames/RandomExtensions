@@ -6,6 +6,44 @@ namespace RandomExtensions.Tests;
 public class WeightedListTests
 {
     [Test]
+    public void Test_Add()
+    {
+        var list = new WeightedList<int>();
+
+        list.Add(0, 1);
+        Assert.That(list.Count, Is.EqualTo(1));
+        Assert.That(list[0].Value, Is.EqualTo(0));
+        Assert.That(list.TotalWeight, Is.EqualTo(1));
+
+        list.Add(1, 2);
+        Assert.That(list.Count, Is.EqualTo(2));
+        Assert.That(list[1].Value, Is.EqualTo(1));
+        Assert.That(list.TotalWeight, Is.EqualTo(3));
+    }
+
+    [Test]
+    public void Test_Remove()
+    {
+        var list = new WeightedList<int>
+        {
+            { 0, 1 },
+            { 1, 1 },
+            { 2, 1 },
+            { 3, 1 },
+        };
+
+        Assert.That(list.TotalWeight, Is.EqualTo(4));
+        list.RemoveAt(0);
+        Assert.That(list.TotalWeight, Is.EqualTo(3));
+        list.RemoveAt(0);
+        Assert.That(list.TotalWeight, Is.EqualTo(2));
+        list.RemoveAt(0);
+        Assert.That(list.TotalWeight, Is.EqualTo(1));
+        list.RemoveAt(0);
+        Assert.That(list.TotalWeight, Is.EqualTo(0));
+    }
+
+    [Test]
     public void Test_RemoveRandom()
     {
         var list = Enumerable.Range(0, 100).ToWeightedList(x => 1);
