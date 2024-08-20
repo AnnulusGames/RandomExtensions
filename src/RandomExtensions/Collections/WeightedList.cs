@@ -126,6 +126,8 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
 
     public T GetItem(IRandom random)
     {
+        if (list.Count == 0) throw new InvalidOperationException("Empty list");
+
         var r = random.NextDouble() * totalWeight;
         var current = 0.0;
 
@@ -138,7 +140,7 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
             }
         }
 
-        return default!;
+        return list[^1].Value;
     }
 
     public void GetItems(IRandom random, Span<T> destination)
@@ -228,7 +230,11 @@ public class WeightedList<T> : IReadOnlyWeightedList<T>, IList<WeightedValue<T>>
             }
         }
 
-        item = list[^1].Value;
+        var lastIndex = list.Count - 1;
+        var lastWv = list[lastIndex];
+        item = lastWv.Value;
+        list.RemoveAt(lastIndex);
+        totalWeight -= lastWv.Weight;
     }
 
     IEnumerator IEnumerable.GetEnumerator()

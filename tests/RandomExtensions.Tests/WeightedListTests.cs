@@ -1,4 +1,5 @@
 using RandomExtensions.Collections;
+using RandomExtensions.Linq;
 
 namespace RandomExtensions.Tests;
 
@@ -7,24 +8,15 @@ public class WeightedListTests
     [Test]
     public void Test_RemoveRandom()
     {
-        var list = new WeightedList<int>
+        var list = Enumerable.Range(0, 100).ToWeightedList(x => 1);
+        var hashSet = new HashSet<int>();
+
+        for (int i = 0; i < 100; i++)
         {
-            { 1, 1.0 },
-            { 2, 2.0 },
-            { 3, 3.0 },
-        };
-
-        list.RemoveRandom(out var item0);
-        Assert.That(list, Has.Count.EqualTo(2));
-        Assert.That(item0, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
-
-        list.RemoveRandom(out var item1);
-        Assert.That(list, Has.Count.EqualTo(1));
-        Assert.That(item1, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
-
-        list.RemoveRandom(out var item2);
-        Assert.That(list, Has.Count.EqualTo(0));
-        Assert.That(item2, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
+            list.RemoveRandom(out var item);
+            Assert.That(item, Is.GreaterThanOrEqualTo(0).And.LessThan(100));
+            Assert.IsTrue(hashSet.Add(item));
+        }
 
         Assert.Throws<InvalidOperationException>(() => list.RemoveRandom(out _));
     }
@@ -39,12 +31,15 @@ public class WeightedListTests
             { 3, 3.0 },
         };
 
-        var elements = list.GetItems(10000);
-
-        for (int i = 0; i < elements.Length; i++)
+        for (int i = 0; i < 10000; i++)
         {
-            Assert.That(elements[i], Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
+            var element = list.GetItem();
+            Assert.That(list, Has.Count.EqualTo(3));
+            Assert.That(element, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
         }
+
+        var empty = new WeightedList<int>();
+        Assert.Throws<InvalidOperationException>(() => empty.GetItem());
     }
 
     [Test]
@@ -57,12 +52,15 @@ public class WeightedListTests
             { 3, 3.0 },
         };
 
-        for (int i = 0; i < 10000; i++)
+        var elements = list.GetItems(10000);
+
+        for (int i = 0; i < elements.Length; i++)
         {
-            var element = list.GetItem();
-            Assert.That(list, Has.Count.EqualTo(3));
-            Assert.That(element, Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
+            Assert.That(elements[i], Is.EqualTo(1).Or.EqualTo(2).Or.EqualTo(3));
         }
+
+        var empty = new WeightedList<int>();
+        Assert.Throws<InvalidOperationException>(() => empty.GetItems(10));
     }
 
 
