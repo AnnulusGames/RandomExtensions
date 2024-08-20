@@ -7,19 +7,17 @@ public static class WeightedCollectionExtensions
         return collection.GetItem(RandomEx.Shared);
     }
 
-    public static TValue[] GetItems<TValue, TRandom>(this IWeightedCollection<TValue> collection, int length, TRandom random)
-        where TRandom : IRandom
+    public static T[] GetItems<T>(this IWeightedCollection<T> collection, int length, IRandom random)
     {
         ThrowHelper.ThrowIfLengthIsNegative(length);
 
-        var array = new TValue[length];
+        var array = new T[length];
         collection.GetItems(random, array.AsSpan());
 
         return array;
     }
 
-    public static TValue[] GetItems<TValue, TRandom>(this IWeightedCollection<TValue> collection, int length)
-        where TRandom : IRandom
+    public static T[] GetItems<T>(this IWeightedCollection<T> collection, int length)
     {
         return GetItems(collection, length, RandomEx.Shared);
     }
