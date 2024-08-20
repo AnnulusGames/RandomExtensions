@@ -177,7 +177,19 @@ public static partial class RandomEx
     public static float NextFloat(this IRandom random, float min, float max)
     {
         ThrowHelper.CheckMinMax(min, max);
-        return NextFloat(random) * (max - min) + min;
+
+        var r = NextFloat(random) * (max - min) + min;
+
+        if (r >= max)
+        {
+#if !NET6_0_OR_GREATER
+            r = MathEx.BitDecrement(max);
+#else
+            r = MathF.BitDecrement(max);
+#endif
+        }
+
+        return r;
     }
 
     /// <summary>
@@ -206,7 +218,20 @@ public static partial class RandomEx
     public static double NextDouble(this IRandom random, double min, double max)
     {
         ThrowHelper.CheckMinMax(min, max);
-        return NextDouble(random) * (max - min) + min;
+
+        var r = NextDouble(random) * (max - min) + min;
+
+        // correct for rounding
+        if (r >= max)
+        {
+#if !NET6_0_OR_GREATER
+            r = MathEx.BitDecrement(max);
+#else
+            r = Math.BitDecrement(max);
+#endif
+        }
+
+        return r;
     }
 
     /// <summary>
