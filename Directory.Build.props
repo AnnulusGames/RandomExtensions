@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <!-- NuGet Packaging -->
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
         <Authors>Annulus Games</Authors>
         <Copyright>© Annulus Games</Copyright>
         <PackageProjectUrl>https://github.com/AnnulusGames/RandomExtensions</PackageProjectUrl>
